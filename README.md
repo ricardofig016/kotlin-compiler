@@ -60,7 +60,7 @@ Kotlin Compiler
 
 explain the tests used
 explain how to run tests
-explain how to add tests (dont forget to mention that the variable `tests` in `/tests` needs to be updated)
+explain how to add tests (dont forget to mention that the variable `tests` in `Test.hs` needs to be updated)
 
 ## Notes for the Devs
 
