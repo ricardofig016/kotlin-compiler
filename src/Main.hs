@@ -1,7 +1,5 @@
 module Main where
 
-import           Control.Monad     (forM_)
-import           Control.Monad.RWS (MonadState (put))
 import           Lexer
 import           Parser
 
