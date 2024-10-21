@@ -50,7 +50,7 @@ Kotlin Compiler
 │   ├── Parser.y
 │   └── Test.hs
 └── tests
-    ├── input1.txt
+    ├── input1.kt
     ├── ...
     ├── output1.txt
     └── ...

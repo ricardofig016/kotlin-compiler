@@ -6,7 +6,7 @@ import           Lexer
 main :: IO ()
 main = do
   -- input <- getLine
-  input <- readFile "./../tests/input1.txt"
+  input <- readFile "./../tests/input1.kt"
   let result = alexScanTokens input
   print result
   -- let result = parse $ alexScanTokens input

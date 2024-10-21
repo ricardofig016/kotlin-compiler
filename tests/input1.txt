@@ -1,6 +1,0 @@
-fun main() {
-    val x: Int = 5
-    val x: Char = 'c'
-    println("hey")
-    println(x)
-}

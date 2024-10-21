@@ -76,8 +76,8 @@ String                                  { \_ -> STRING }
 ( $alpha | _ ) ( $alpha | $digit | _ )*   { \s -> ID s }
 $digit+                                   { \s -> NUM (read s) }
 $digit* \. $digit+                        { \s -> REAL (read s) }
-\' \\? .? \'                              { \s -> LETTER s }
-\" ( ~\" | \\\" )* \"                     { \s -> SENTENCE s }
+\' \\? . \'                               { \s -> LETTER (init (tail s)) }
+\" ( ~\" | \\\" )* \"                     { \s -> SENTENCE (init (tail s)) }
 
 
 

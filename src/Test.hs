@@ -9,7 +9,7 @@ main :: IO ()
 main = do
   let tests = 2
   forM_ [1 .. tests] $ \i -> do
-    input <- readFile ("./../tests/input" ++ show i ++ ".txt")
+    input <- readFile ("./../tests/input" ++ show i ++ ".kt")
     outputFile <- readFile ("./../tests/output" ++ show i ++ ".txt")
     -- putStrLn ("input " ++ show i ++ ": " ++ show (alexScanTokens input)) -- print tokens
     let correctOutput = read outputFile :: Double
