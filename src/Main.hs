@@ -1,12 +1,14 @@
 module Main where
 
 import           Lexer
+import           Parser
 
--- import           Parser
 main :: IO ()
 main = do
   -- input <- getLine
-  input <- readFile "./../tests/input1.kt"
-  let result = alexScanTokens input
+  input <- readFile "./../tests/input2.kt"
+  let tokens = alexScanTokens input
+  let ast = parse tokens
+  print ast
   -- let result = parse $ alexScanTokens input
-  print result
+  -- print result
