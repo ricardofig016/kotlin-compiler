@@ -31,4 +31,10 @@ fun main() {
     // } else {
     //     print("Life is not greater than 40");
     // }
+
+
+    // increment and decrement
+    var x: Int = 0;
+    x++;
+    x*=2;
 }

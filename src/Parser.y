@@ -13,7 +13,7 @@ import Lexer
 ')'         { RPAREN }
 '{'         { LBRACE }
 '}'         { RBRACE }
--- ','         { COMMA }
+-- ','         { COMMA } -- the comma token is used for separating function parameters and array/list values, which we don't support in this subset of kotlin
 ':'         { COLON }
 ';'         { SEMICOLON }
 '='         { ASSIGN }
@@ -22,13 +22,13 @@ import Lexer
 '*'         { MULT }
 '/'         { DIV }
 '%'         { MOD }
--- '++'        { INCREMENT }
--- '--'        { DECREMENT }
--- '+='        { PLUSEQUAL }
--- '-='        { MINUSEQUAL }
--- '*='        { MULTEQUAL }
--- '/='        { DIVEQUAL }
--- '%='        { MODEQUAL }
+'++'        { INCREMENT }
+'--'        { DECREMENT }
+'+='        { PLUSEQUAL }
+'-='        { MINUSEQUAL }
+'*='        { MULTEQUAL }
+'/='        { DIVEQUAL }
+'%='        { MODEQUAL }
 '<'         { LESS }
 '>'         { GREATER }
 '<='        { LESSEQUAL }
@@ -78,6 +78,13 @@ Statements : Statement Statements { $1 : $2 }
 Statement : var id ':' Type '=' Exp ';'     { VarDecl $2 $4 $6 }
           | val id ':' Type '=' Exp ';'     { ValDecl $2 $4 $6 }
           | id '=' Exp ';'                  { Assignment $1 $3 }
+          | id '++' ';'                     { Assignment $1 (Add (Id $1) (Num 1)) }
+          | id '--' ';'                     { Assignment $1 (Sub (Id $1) (Num 1)) }
+          | id '+=' Exp ';'                 { Assignment $1 (Add (Id $1) $3) }
+          | id '-=' Exp ';'                 { Assignment $1 (Sub (Id $1) $3) }
+          | id '*=' Exp ';'                 { Assignment $1 (Mult (Id $1) $3) }
+          | id '/=' Exp ';'                 { Assignment $1 (Div (Id $1) $3) }
+          | id '%=' Exp ';'                 { Assignment $1 (Mod (Id $1) $3) }
           | print '(' Exp ')' ';'           { PrintStmt $3 }
           | readln '(' ')' ';'              { ReadlnStmt }
           | while '(' Exp ')' Block         { WhileStmt $3 $5 }
