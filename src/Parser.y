@@ -100,9 +100,9 @@ LogicalExp : ComparisonExp                 { $1 }
 
 ComparisonExp : NotExp                    { $1 }
               | ComparisonExp '<' NotExp  { Less $1 $3 }
-              | ComparisonExp '>' NotExp  { Greater $1 $3 }
+              | ComparisonExp '>' NotExp  { Less $3 $1 }
               | ComparisonExp '<=' NotExp { LessEqual $1 $3 }
-              | ComparisonExp '>=' NotExp { GreaterEqual $1 $3 }
+              | ComparisonExp '>=' NotExp { LessEqual $3 $1 }
               | ComparisonExp '==' NotExp { EqualTo $1 $3 }
               | ComparisonExp '!=' NotExp { NotEqual $1 $3 }
 
@@ -166,9 +166,7 @@ data Exp
   | Div Exp Exp
   | Mod Exp Exp
   | Less Exp Exp
-  | Greater Exp Exp
   | LessEqual Exp Exp
-  | GreaterEqual Exp Exp
   | EqualTo Exp Exp
   | NotEqual Exp Exp
   | And Exp Exp

@@ -1030,7 +1030,7 @@ happyReduction_28 (HappyAbsSyn12  happy_var_3)
 	_
 	(HappyAbsSyn11  happy_var_1)
 	 =  HappyAbsSyn11
-		 (Greater happy_var_1 happy_var_3
+		 (Less happy_var_3 happy_var_1
 	)
 happyReduction_28 _ _ _  = notHappyAtAll 
 
@@ -1048,7 +1048,7 @@ happyReduction_30 (HappyAbsSyn12  happy_var_3)
 	_
 	(HappyAbsSyn11  happy_var_1)
 	 =  HappyAbsSyn11
-		 (GreaterEqual happy_var_1 happy_var_3
+		 (LessEqual happy_var_3 happy_var_1
 	)
 happyReduction_30 _ _ _  = notHappyAtAll 
 
@@ -1364,9 +1364,7 @@ data Exp
   | Div Exp Exp
   | Mod Exp Exp
   | Less Exp Exp
-  | Greater Exp Exp
   | LessEqual Exp Exp
-  | GreaterEqual Exp Exp
   | EqualTo Exp Exp
   | NotEqual Exp Exp
   | And Exp Exp
