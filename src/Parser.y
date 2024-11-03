@@ -59,8 +59,8 @@ string      { STRING }
 id          { ID $$ }
 num         { NUM $$ }
 real        { REAL $$ }
--- letter      { LETTER $$ }
--- sentence    { SENTENCE $$ }
+letter      { LETTER $$ }
+sentence    { SENTENCE $$ }
 
 %%
 
@@ -123,6 +123,8 @@ Unit : num         { Num $1 }
      | id          { Id $1 }
      | true        { TruthValue True }
      | false       { TruthValue False }
+     | letter      { Letter $1 }
+     | sentence    { Sentence $1 }
      | '(' Exp ')' { $2 }
 
 Type : int     { IntType }
@@ -156,6 +158,8 @@ data Exp
   | Real Double
   | Id String
   | TruthValue Bool
+  | Letter String -- string of length 1
+  | Sentence String
   | Add Exp Exp
   | Sub Exp Exp
   | Mult Exp Exp

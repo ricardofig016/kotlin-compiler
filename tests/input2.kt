@@ -26,15 +26,14 @@ fun main() {
     if (!a && b || !a && !b) {print(0);}
 
     // if else statement
-    // if (life > 40) {
-    //     print("Life is greater than 40");
-    // } else {
-    //     print("Life is not greater than 40");
-    // }
-
+    if (life > 40) {
+        print("Life is greater than 40");
+    } else {
+        print("Life is not greater than 40");
+    }
 
     // increment and decrement
-    var x: Int = 0;
-    x++;
-    x*=2;
+    // var x: Int = 0;
+    // x++;
+    // x*=2;
 }

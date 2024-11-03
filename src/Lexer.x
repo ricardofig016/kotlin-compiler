@@ -146,7 +146,7 @@ data Token =
     | ID String
     | NUM Int
     | REAL Double
-    | LETTER String
+    | LETTER String -- string of length 1
     | SENTENCE String
 
     deriving (Eq, Show)
