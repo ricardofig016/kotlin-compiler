@@ -5,10 +5,9 @@ import           Parser
 
 main :: IO ()
 main = do
-  input <- readFile "./../tests/input1.kt"
+  input <- readFile "./../inputs/input1.kt"
   let tokens = alexScanTokens input
   let ast = parse tokens
-  print ast -- for debugging
   -- write to output file
   let file = "../output.txt"
   writeFile file "Tokens:\n"
