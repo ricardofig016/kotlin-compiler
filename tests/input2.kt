@@ -1,5 +1,34 @@
 fun main() {
+    // Variable Declarations and Assignments
     val calc: Int = (5 + 9 * 7);
     var life: Int = 42;
+    var result: Double = 0.0;
+
+    // print initial values
     print(calc);
+    print(life);
+    print(result);
+
+    // arithmetic expressions
+    result = (calc + life) / 2.0;
+    print(result);
+
+    // while loop
+    var counter: Int = 3;
+    while (counter > 0) {
+        print(counter);
+        counter = counter - 1;
+    }
+
+    // if statement
+    val a: Boolean = true;
+    val b: Boolean = false;
+    if (!a && b || !a && !b) {print(0);}
+
+    // if else statement
+    // if (life > 40) {
+    //     print("Life is greater than 40");
+    // } else {
+    //     print("Life is not greater than 40");
+    // }
 }

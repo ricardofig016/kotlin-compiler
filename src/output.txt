@@ -1,6 +1,0 @@
-Tokens:
-[FUN,MAIN,LPAREN,RPAREN,LBRACE,VAL,ID "calc",COLON,INT,ASSIGN,LPAREN,NUM 5,PLUS,NUM 9,MULT,NUM 7,RPAREN,SEMICOLON,VAR,ID "life",COLON,INT,ASSIGN,NUM 42,SEMICOLON,PRINT,LPAREN,ID "calc",RPAREN,SEMICOLON,RBRACE]
-
-AST:
-Statements [ValDecl "calc" IntType (Add (Num 5) (Mult (Num 9) (Num 7))),VarDecl "life" IntType (Num 42),PrintStmt (Var "calc")]
-
