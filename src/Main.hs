@@ -5,7 +5,7 @@ import           Parser
 
 main :: IO ()
 main = do
-  input <- readFile "./../tests/input2.kt"
+  input <- readFile "./../tests/input1.kt"
   let tokens = alexScanTokens input
   let ast = parse tokens
   print ast -- for debugging

@@ -48,10 +48,12 @@ fun main() {
     print("Conditional expression:\n");
     if (a > b) {
         print("a is greater than b\n");
-    } else if (a < b) {
-        print("a is less than b\n");
     } else {
-        print("a is equal to b\n");
+        if (a < b) {
+            print("a is less than b\n");
+        } else {
+            print("a is equal to b\n");
+        }
     }
 
     // 6. While Loop
@@ -59,7 +61,7 @@ fun main() {
     print("While loop:\n");
     while (counter < 5) {
         print("Counter: " + counter + "\n");
-        counter++  // Incrementing counter
+        counter++;  // Incrementing counter
     }
 
     // 7. Combining arithmetic and boolean expressions with a while loop

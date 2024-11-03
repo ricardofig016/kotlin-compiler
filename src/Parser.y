@@ -86,7 +86,6 @@ Statement : var id ':' Type '=' Exp ';'     { VarDecl $2 $4 $6 }
           | id '/=' Exp ';'                 { Assignment $1 (Div (Id $1) $3) }
           | id '%=' Exp ';'                 { Assignment $1 (Mod (Id $1) $3) }
           | print '(' Exp ')' ';'           { PrintStmt $3 }
-          | readln '(' ')' ';'              { ReadlnStmt }
           | while '(' Exp ')' Block         { WhileStmt $3 $5 }
           | if '(' Exp ')' Block else Block { IfElseStmt $3 $5 $7 }
           | if '(' Exp ')' Block            { IfStmt $3 $5 }
@@ -118,14 +117,15 @@ MultDivExp : Unit                { $1 }
            | MultDivExp '/' Unit { Div $1 $3 }
            | MultDivExp '%' Unit { Mod $1 $3 }
 
-Unit : num         { Num $1 }
-     | real        { Real $1 }
-     | id          { Id $1 }
-     | true        { TruthValue True }
-     | false       { TruthValue False }
-     | letter      { Letter $1 }
-     | sentence    { Sentence $1 }
-     | '(' Exp ')' { $2 }
+Unit : num            { Num $1 }
+     | real           { Real $1 }
+     | id             { Id $1 }
+     | true           { TruthValue True }
+     | false          { TruthValue False }
+     | letter         { Letter $1 }
+     | sentence       { Sentence $1 }
+     | '(' Exp ')'    { $2 }
+     | readln '(' ')' { ReadlnStmt }
 
 Type : int     { IntType }
      | long    { LongType }
@@ -147,7 +147,6 @@ data Statement
   | ValDecl String Type Exp
   | Assignment String Exp
   | PrintStmt Exp
-  | ReadlnStmt
   | WhileStmt Exp Block
   | IfElseStmt Exp Block Block
   | IfStmt Exp Block
@@ -172,6 +171,7 @@ data Exp
   | And Exp Exp
   | Or Exp Exp
   | Not Exp
+  | ReadlnStmt
   deriving Show
 
 data Type
