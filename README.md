@@ -14,9 +14,7 @@ The entire compiler is implemented in Haskell, using two key tools: **Alex** and
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Usage](#usage)
-    - [Building and Running the Project](#building-and-running-the-project)
-    - [Compiling Kotlin Code](#compiling-kotlin-code)
-  - [Project Structure (NOT UPDATED)](#project-structure-not-updated)
+  - [Project Structure](#project-structure)
   - [Notes for the Devs](#notes-for-the-devs)
 
 ## Features
@@ -68,45 +66,45 @@ Together, Alex and Happy create a cohesive compilation pipeline that translates 
 
 ## Usage
 
-### Building and Running the Project
+To compile Kotlin files with this project, follow these steps:
 
-1. To build the project, use the following command:
+1. **Build the Project**  
+   Use the following command to build the project:
 
    ```sh
    cabal build
    ```
 
-2. After building, run the project with the following command, passing an integer argument `x` to specify the input file:
+2. **Prepare the Input File**  
+   Ensure your Kotlin file is named in the format `input[x].kt`, where `x` is an integer (e.g., `input1.kt`), and place it in the `inputs` directory.
+
+3. **Run the Project**  
+   Run the project with the following command, passing the integer `x` to specify the file:
 
    ```sh
    cabal run .\kotlin-compiler.cabal [x]
    ```
 
-   Here, `x` is the integer corresponding to the input file `input[x].kt` in the `inputs` directory. For example, to compile `input1.kt`, use:
+   For example, to compile `input1.kt`, use:
 
    ```sh
    cabal run .\kotlin-compiler.cabal 1
    ```
 
-This will compile the specified Kotlin file and generate the output in `output.txt`.
+   The compiler will process the specified Kotlin file and generate `output.txt`, which includes the token sequence and abstract syntax tree (AST) representation.
 
-### Compiling Kotlin Code
-
-To compile a Kotlin file, ensure it follows the required format and place it in the appropriate directory:
-
-1. Name your Kotlin file as `input[x].kt`, where `x` is an integer (e.g., `input1.kt`), and place it in the `inputs` directory.
-2. Run the project using the provided command.
-3. The compiler will process the file and generate the output in `output.txt`, including the token sequence and abstract syntax tree (AST) representation.
-
-## Project Structure (NOT UPDATED)
+## Project Structure
 
 ```paintext
-Kotlin Compiler
+kotlin-compiler
 ├── README.md
+├── .gitignore
+├── kotlin-compiler.cabal
+├── output.txt
 ├── inputs
 │   ├── input1.kt
 │   ├── input2.kt
-├── output.txt
+│   └── (...)
 ├── src
 │   ├── Lexer.hs
 │   ├── Lexer.x
