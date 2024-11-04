@@ -14,7 +14,9 @@ The entire compiler is implemented in Haskell, using two key tools: **Alex** and
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Usage](#usage)
-  - [Project Structure](#project-structure)
+    - [Building and Running the Project](#building-and-running-the-project)
+    - [Compiling Kotlin Code](#compiling-kotlin-code)
+  - [Project Structure (NOT UPDATED)](#project-structure-not-updated)
   - [Notes for the Devs](#notes-for-the-devs)
 
 ## Features
@@ -46,6 +48,7 @@ Together, Alex and Happy create a cohesive compilation pipeline that translates 
 - Alex v.3.4.0.1
 - Happy v.1.20.1.1
 - GHC (Glasgow Haskell Compiler)
+- Cabal v.3.10.3.0
 
 ## Installation
 
@@ -56,18 +59,46 @@ Together, Alex and Happy create a cohesive compilation pipeline that translates 
    cd kotlin-compiler
    ```
 
-<!-- 2. Install the dependencies:
+2. Install the dependencies:
 
    ```sh
    cabal update
-   cabal install alex happy
-   ``` -->
+   cabal install
+   ```
 
 ## Usage
 
-explain how to copile and run
+### Building and Running the Project
 
-## Project Structure
+1. To build the project, use the following command:
+
+   ```sh
+   cabal build
+   ```
+
+2. After building, run the project with the following command, passing an integer argument `x` to specify the input file:
+
+   ```sh
+   cabal run .\kotlin-compiler.cabal [x]
+   ```
+
+   Here, `x` is the integer corresponding to the input file `input[x].kt` in the `inputs` directory. For example, to compile `input1.kt`, use:
+
+   ```sh
+   cabal run .\kotlin-compiler.cabal 1
+   ```
+
+This will compile the specified Kotlin file and generate the output in `output.txt`.
+
+### Compiling Kotlin Code
+
+To compile a Kotlin file, ensure it follows the required format and place it in the appropriate directory:
+
+1. Name your Kotlin file as `input[x].kt`, where `x` is an integer (e.g., `input1.kt`), and place it in the `inputs` directory.
+2. Run the project using the provided command.
+3. The compiler will process the file and generate the output in `output.txt`, including the token sequence and abstract syntax tree (AST) representation.
+
+## Project Structure (NOT UPDATED)
 
 ```paintext
 Kotlin Compiler
