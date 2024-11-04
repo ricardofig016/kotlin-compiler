@@ -91,11 +91,13 @@ Statement : var id ':' Type '=' Exp ';'     { VarDecl $2 $4 $6 }
           | if '(' Exp ')' Block            { IfStmt $3 $5 }
           -- TODO: add the missing statements
 
-Exp : LogicalExp { $1 }
+Exp : DisjunctionExp { $1 }
 
-LogicalExp : ComparisonExp                 { $1 }
-           | LogicalExp '&&' ComparisonExp { And $1 $3 }
-           | LogicalExp '||' ComparisonExp { Or $1 $3 }
+DisjunctionExp : ConjunctionExp                     { $1 }
+               | DisjunctionExp '||' ConjunctionExp { Or $1 $3 }
+
+ConjunctionExp : ComparisonExp                     { $1 }
+               | ConjunctionExp '&&' ComparisonExp { And $1 $3 }
 
 ComparisonExp : NotExp                    { $1 }
               | ComparisonExp '<' NotExp  { Less $1 $3 }

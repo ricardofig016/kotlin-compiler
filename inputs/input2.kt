@@ -23,7 +23,7 @@ fun main() {
     // if statement
     val a: Boolean = true;
     val b: Boolean = false;
-    if (!a && b || !a && !b) {print(0);}
+    if (!a) {print(0);}
 
     // if else statement
     if (life > 40) {
@@ -33,7 +33,15 @@ fun main() {
     }
 
     // increment and decrement
-    // var x: Int = 0;
-    // x++;
-    // x*=2;
+    var x: Int = 0;
+    x++;
+    x*=2;
+
+    // logical precedence ( && > || )
+    val c: Boolean = true;
+    val d: Boolean = false;
+    if (c && d || c) {}
+    if (c || d && c) {}
+    if (a || b && c || d) {}
+    if (a && b || c && d) {}
 }
