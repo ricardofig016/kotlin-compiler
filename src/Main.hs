@@ -1,11 +1,15 @@
 module Main where
 
-import           Lexer
-import           Parser
+import           Lexer              (alexScanTokens)
+import           Parser             (parse)
+import           System.Environment (getArgs)
 
 main :: IO ()
 main = do
-  input <- readFile "inputs/input2.kt"
+  args <- getArgs
+  let x = read (head args) :: Int
+  let inputFile = "inputs/input" ++ show x ++ ".kt"
+  input <- readFile inputFile
   let tokens = alexScanTokens input
   let ast = parse tokens
   -- write to output file
