@@ -43,10 +43,21 @@ Together, Alex and Happy create a cohesive compilation pipeline that translates 
 
 ## Prerequisites
 
-- Alex v.3.4.0.1
-- Happy v.1.20.1.1
-- GHC (Glasgow Haskell Compiler)
-- Cabal v.3.10.3.0
+Ensure the following tools are installed before building and running the project:
+
+1. **GHC v.9.4.8 (or above)**
+
+   GHC (Glasgow Haskell Compiler) is required to compile and run Haskell code.
+
+   - **Installation**: Visit the [GHC download page](https://www.haskell.org/ghc/download.html) and select the installer for your operating system.
+   - **Verification**: Run `ghc --version` in your terminal to confirm installation.
+
+2. **Cabal v.3.10.3.0 (or above)**
+
+   Cabal is a package manager for Haskell projects, used to build and manage dependencies.
+
+   - **Installation**: Download Cabal from the [official Cabal website](https://www.haskell.org/cabal/download.html) and follow the installation instructions for your OS.
+   - **Verification**: Run `cabal --version` to ensure Cabal is properly installed.
 
 ## Installation
 
