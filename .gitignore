@@ -3,3 +3,6 @@ dist-newstyle
 
 # local cabal files
 cabal.project.local
+
+# output file
+output.txt
