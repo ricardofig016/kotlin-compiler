@@ -1,0 +1,5 @@
+# build artifacts
+dist-newstyle
+
+# local cabal files
+cabal.project.local
