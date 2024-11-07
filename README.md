@@ -15,7 +15,6 @@ The entire compiler is implemented in Haskell, using two key tools: **Alex** and
   - [Installation](#installation)
   - [Usage](#usage)
   - [Project Structure](#project-structure)
-  - [Notes for the Devs](#notes-for-the-devs)
 
 ## Features
 
@@ -108,22 +107,17 @@ To compile Kotlin files with this project, follow these steps:
 
 ```paintext
 kotlin-compiler
-├── README.md
-├── .gitignore
 ├── kotlin-compiler.cabal
 ├── output.txt
+├── README.md
 ├── inputs
 │   ├── input1.kt
 │   ├── input2.kt
 │   └── (...)
-├── src
-│   ├── Lexer.hs
-│   ├── Lexer.x
-│   ├── Main.hs
-│   ├── Parser.hs
-│   └── Parser.y
+└── src
+    ├── Lexer.hs
+    ├── Lexer.x
+    ├── Main.hs
+    ├── Parser.hs
+    └── Parser.y
 ```
-
-## Notes for the Devs
-
-convert this file to **pdf** before turning the project in
