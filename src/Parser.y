@@ -184,7 +184,7 @@ data Type
   | BooleanType
   | CharType
   | StringType
-  deriving Show
+  deriving (Eq, Show)
 
 
 parseError :: [Token] -> a
