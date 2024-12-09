@@ -1,6 +1,8 @@
 module Liveness where
 
 import           CodeGenaretor (Instr (..), Temp)
+import           Data.List ((\\))
+import           Data.Maybe (fromMaybe)
 
 -- Definição do Node
 data Node = Node
@@ -56,3 +58,33 @@ buildGraph instrs = buildNodes instrs 1
           node = Node idx instruct genSet killSet succSet [] []
           restOfGraph = buildNodes instructs (idx + 1)
       in node : restOfGraph
+
+-- Atualiza o conjunto in[i] e out[i] para um nó específico
+updateNode :: Graph -> Node -> Node
+updateNode graph node =
+  let -- Calcula out[i] como a união dos in[j] para todos os sucessores j
+      succNodes = map (\idx -> fromMaybe (error "Invalid node index") (lookupNode idx graph)) (succ node)
+      outSetNew = concatMap inSet succNodes
+
+      -- Calcula in[i] como gen[i] ∪ (out[i] \ kill[i])
+      inSetNew = gen node ++ (outSetNew \\ kill node)
+  in node { inSet = inSetNew, outSet = outSetNew }
+
+-- Procura um nó no grafo pelo índice
+lookupNode :: Int -> Graph -> Maybe Node
+lookupNode idx = find (\node -> index node == idx)
+
+-- Executa o algoritmo iterativo para calcular in[i] e out[i] até a convergência
+computeLiveness :: Graph -> Graph
+computeLiveness graph = iterateLiveness graph []
+  where
+    iterateLiveness :: Graph -> Graph -> Graph
+    iterateLiveness currentGraph prevGraph
+      | currentGraph == prevGraph = currentGraph  -- Convergência atingida
+      | otherwise =
+          let updatedGraph = reverse $ foldl (\acc node -> updateNode acc node : acc) [] (reverse currentGraph)
+          in iterateLiveness updatedGraph currentGraph
+
+-- Atualiza todos os nós do grafo em ordem inversa
+updateGraph :: Graph -> Graph
+updateGraph graph = map (updateNode graph) (reverse graph)
