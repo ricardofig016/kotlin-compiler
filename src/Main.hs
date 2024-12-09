@@ -27,7 +27,7 @@ main = do
   print (checkAST ast)
   let (lowLevelCode, _) = runState (transAST ast) (0, 0)
   mapM_ (appendFile file . (++ "\n") . show) lowLevelCode
-  let graph = buildGraph program
+  let graph = buildGraph lowLevelCode
   mapM_ print graph
 
 printTokens :: Show a => a -> FilePath -> IO ()
