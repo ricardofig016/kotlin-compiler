@@ -6,6 +6,7 @@ import           Parser              (parse)
 import           SemanticAnalyzer    (checkAST)
 import           CodeGenaretor       (transAST)
 import           System.Environment  (getArgs)
+import           Liveness            (buildGraph)
 
 main :: IO ()
 main = do
@@ -26,6 +27,8 @@ main = do
   print (checkAST ast)
   let (lowLevelCode, _) = runState (transAST ast) (0, 0)
   mapM_ (appendFile file . (++ "\n") . show) lowLevelCode
+  let graph = buildGraph program
+  mapM_ print graph
 
 printTokens :: Show a => a -> FilePath -> IO ()
 printTokens tokens file = do
