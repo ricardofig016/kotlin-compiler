@@ -6,11 +6,11 @@ import qualified Data.Bits as Bits
 import Control.Applicative(Applicative(..))
 import Control.Monad (ap)
 
--- parser produced by Happy Version 1.20.1.1
+-- parser produced by Happy Version 1.19.12
 
 data HappyAbsSyn t4 t5 t6 t7 t8 t9 t10 t11 t12 t13 t14 t15 t16 t17
 	= HappyTerminal (Token)
-	| HappyErrorToken Prelude.Int
+	| HappyErrorToken Int
 	| HappyAbsSyn4 t4
 	| HappyAbsSyn5 t5
 	| HappyAbsSyn6 t6
@@ -26,7 +26,7 @@ data HappyAbsSyn t4 t5 t6 t7 t8 t9 t10 t11 t12 t13 t14 t15 t16 t17
 	| HappyAbsSyn16 t16
 	| HappyAbsSyn17 t17
 
-happyExpList :: Happy_Data_Array.Array Prelude.Int Prelude.Int
+happyExpList :: Happy_Data_Array.Array Int Int
 happyExpList = Happy_Data_Array.listArray (0,301) ([0,0,0,16,0,0,0,512,0,0,0,0,0,0,0,0,16,0,0,0,0,0,1024,0,0,0,0,1,0,0,0,64,0,0,0,0,0,0,0,0,2,37888,4105,0,64,0,0,0,0,0,9808,64,0,0,0,0,0,4,0,0,0,128,0,0,0,0,0,0,1024,0,0,0,32768,0,64,0,0,0,0,16258,0,0,0,1,34816,49217,7,1024,0,0,0,32768,0,0,0,32768,0,50176,57376,3,16,32768,1048,124,512,0,33552,3968,16384,0,25088,61456,1,8,16384,524,62,256,0,16776,1984,0,2,0,0,0,64,0,0,0,128,0,8388,992,4096,0,6272,31748,0,0,0,0,0,0,0,0,0,4096,0,0,0,0,0,1024,0,0,0,16384,0,0,0,57344,7,0,0,0,0,0,0,6144,0,0,0,0,28,0,0,0,0,0,0,0,8,16384,524,62,256,0,16776,1984,0,0,0,0,0,0,0,0,0,128,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,64,0,0,0,0,0,0,254,0,0,0,8128,0,32,0,0,0,16384,0,0,0,0,8,0,0,0,256,0,0,0,8192,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,0,0,0,1024,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,8,0,0,0,128,0,0,0,0,0,0,0,0,2,0,0,0,32,0,2096,248,1024,0,1536,7937,32768,0,49152,57376,3,16,0,1048,124,512,0,33536,3968,16384,0,25088,61456,1,8,16384,524,62,256,0,16776,1984,8192,0,12544,63496,0,4,8192,262,31,128,0,8388,992,4096,0,6272,31748,0,2,4096,32899,15,256,0,0,0,0,0,256,0,0,0,512,0,0,0,16128,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,0,0,0,448,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,34816,49217,7,32,0,2097,248,0,0,0,0,0,16,0,0,0,512,0,0,0,2048,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 	])
 
@@ -34,14 +34,14 @@ happyExpList = Happy_Data_Array.listArray (0,301) ([0,0,0,16,0,0,0,512,0,0,0,0,0
 happyExpListPerState st =
     token_strs_expected
   where token_strs = ["error","%dummy","%start_parse","Program","MainFunction","Block","Statements","Statement","Exp","DisjunctionExp","ConjunctionExp","ComparisonExp","NotExp","AddSubExp","MultDivExp","Unit","Type","'('","')'","'{'","'}'","':'","';'","'='","'+'","'-'","'*'","'/'","'%'","'++'","'--'","'+='","'-='","'*='","'/='","'%='","'<'","'>'","'<='","'>='","'=='","'!='","'&&'","'||'","'!'","if","else","while","true","false","val","var","fun","main","print","readln","int","long","float","double","boolean","char","string","id","num","real","letter","sentence","%eof"]
-        bit_start = st Prelude.* 69
-        bit_end = (st Prelude.+ 1) Prelude.* 69
+        bit_start = st * 69
+        bit_end = (st + 1) * 69
         read_bit = readArrayBit happyExpList
-        bits = Prelude.map read_bit [bit_start..bit_end Prelude.- 1]
-        bits_indexed = Prelude.zip bits [0..68]
-        token_strs_expected = Prelude.concatMap f bits_indexed
-        f (Prelude.False, _) = []
-        f (Prelude.True, nr) = [token_strs Prelude.!! nr]
+        bits = map read_bit [bit_start..bit_end - 1]
+        bits_indexed = zip bits [0..68]
+        token_strs_expected = concatMap f bits_indexed
+        f (False, _) = []
+        f (True, nr) = [token_strs !! nr]
 
 action_0 (53) = happyShift action_3
 action_0 (4) = happyGoto action_4
@@ -1346,25 +1346,25 @@ newtype HappyIdentity a = HappyIdentity a
 happyIdentity = HappyIdentity
 happyRunIdentity (HappyIdentity a) = a
 
-instance Prelude.Functor HappyIdentity where
+instance Functor HappyIdentity where
     fmap f (HappyIdentity a) = HappyIdentity (f a)
 
 instance Applicative HappyIdentity where
     pure  = HappyIdentity
     (<*>) = ap
-instance Prelude.Monad HappyIdentity where
+instance Monad HappyIdentity where
     return = pure
     (HappyIdentity p) >>= q = q p
 
 happyThen :: () => HappyIdentity a -> (a -> HappyIdentity b) -> HappyIdentity b
-happyThen = (Prelude.>>=)
+happyThen = (>>=)
 happyReturn :: () => a -> HappyIdentity a
-happyReturn = (Prelude.return)
-happyThen1 m k tks = (Prelude.>>=) m (\a -> k a tks)
+happyReturn = (return)
+happyThen1 m k tks = (>>=) m (\a -> k a tks)
 happyReturn1 :: () => a -> b -> HappyIdentity a
-happyReturn1 = \a tks -> (Prelude.return) a
-happyError' :: () => ([(Token)], [Prelude.String]) -> HappyIdentity a
-happyError' = HappyIdentity Prelude.. (\(tokens, _) -> parseError tokens)
+happyReturn1 = \a tks -> (return) a
+happyError' :: () => ([(Token)], [String]) -> HappyIdentity a
+happyError' = HappyIdentity . (\(tokens, _) -> parseError tokens)
 parse tks = happyRunIdentity happySomeParser where
  happySomeParser = happyThen (happyParse action_0 tks) (\x -> case x of {HappyAbsSyn4 z -> happyReturn z; _other -> notHappyAtAll })
 
@@ -1417,7 +1417,7 @@ data Type
   | BooleanType
   | CharType
   | StringType
-  deriving Show
+  deriving (Eq, Show)
 
 
 parseError :: [Token] -> a
@@ -1467,7 +1467,7 @@ parseError _ = error "parse error: no tokens"
 
 
 
-data Happy_IntList = HappyCons Prelude.Int Happy_IntList
+data Happy_IntList = HappyCons Int Happy_IntList
 
 
 
@@ -1574,7 +1574,7 @@ indexShortOffAddr arr off = arr Happy_Data_Array.! off
 
 
 {-# INLINE happyLt #-}
-happyLt x y = (x Prelude.< y)
+happyLt x y = (x < y)
 
 
 
@@ -1582,7 +1582,7 @@ happyLt x y = (x Prelude.< y)
 
 
 readArrayBit arr bit =
-    Bits.testBit (indexShortOffAddr arr (bit `Prelude.div` 16)) (bit `Prelude.mod` 16)
+    Bits.testBit (indexShortOffAddr arr (bit `div` 16)) (bit `mod` 16)
 
 
 
@@ -1595,8 +1595,8 @@ readArrayBit arr bit =
 
 
 newtype HappyState b c = HappyState
-        (Prelude.Int ->                    -- token number
-         Prelude.Int ->                    -- token number (yes, again)
+        (Int ->                    -- token number
+         Int ->                    -- token number (yes, again)
          b ->                           -- token semantic value
          HappyState b c ->              -- current state
          [HappyState b c] ->            -- state stack
@@ -1643,7 +1643,7 @@ happySpecReduce_3 nt fn j tk _ ((_):(((_):(sts@(((st@(HappyState (action))):(_))
 happyReduce k i fn (1) tk st sts stk
      = happyFail [] (1) tk st sts stk
 happyReduce k nt fn j tk st sts stk
-     = case happyDrop (k Prelude.- ((1) :: Prelude.Int)) sts of
+     = case happyDrop (k - ((1) :: Int)) sts of
          sts1@(((st1@(HappyState (action))):(_))) ->
                 let r = fn stk in  -- it doesn't hurt to always seq here...
                 happyDoSeq r (action nt j tk st1 sts1 r)
@@ -1667,17 +1667,17 @@ happyMonad2Reduce k nt fn j tk st sts stk =
 
 
 
-             _ = nt :: Prelude.Int
+             _ = nt :: Int
              new_state = action
 
           in
           happyThen1 (fn stk tk) (\r -> happyNewToken new_state sts1 (r `HappyStk` drop_stk))
 
 happyDrop (0) l = l
-happyDrop n ((_):(t)) = happyDrop (n Prelude.- ((1) :: Prelude.Int)) t
+happyDrop n ((_):(t)) = happyDrop (n - ((1) :: Int)) t
 
 happyDropStk (0) l = l
-happyDropStk n (x `HappyStk` xs) = happyDropStk (n Prelude.- ((1)::Prelude.Int)) xs
+happyDropStk n (x `HappyStk` xs) = happyDropStk (n - ((1)::Int)) xs
 
 -----------------------------------------------------------------------------
 -- Moving to a new state after a reduction
@@ -1722,7 +1722,7 @@ happyFail explist i tk (HappyState (action)) sts stk =
 -- Internal happy errors:
 
 notHappyAtAll :: a
-notHappyAtAll = Prelude.error "Internal Happy error\n"
+notHappyAtAll = error "Internal Happy error\n"
 
 -----------------------------------------------------------------------------
 -- Hack to get the typechecker to accept our action functions
@@ -1740,7 +1740,7 @@ notHappyAtAll = Prelude.error "Internal Happy error\n"
 --      happySeq = happyDontSeq
 
 happyDoSeq, happyDontSeq :: a -> b -> b
-happyDoSeq   a b = a `Prelude.seq` b
+happyDoSeq   a b = a `seq` b
 happyDontSeq a b = b
 
 -----------------------------------------------------------------------------

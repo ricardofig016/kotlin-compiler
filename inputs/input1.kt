@@ -41,8 +41,8 @@ fun main() {
 
     // 4. Reading input from the user
     print("Enter your name: ");
-    val name: String = readln();
-    print("Hello, " + name + "!" + "\n");
+    // val name: String = readln();
+    // print("Hello, " + name + "!" + "\n");
 
     // 5. Conditional Expressions (if-then-else)
     print("Conditional expression:\n");

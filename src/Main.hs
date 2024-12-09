@@ -1,15 +1,17 @@
 module Main where
 
-import           Lexer              (alexScanTokens)
-import           Parser             (Type (..), parse)
-import           SymbolTable (checkAST)
-import           System.Environment (getArgs)
+import           Control.Monad.State (runState)
+import           Lexer               (alexScanTokens)
+import           Parser              (parse)
+import           SemanticAnalyzer    (checkAST)
+import           CodeGenaretor       (transAST)
+import           System.Environment  (getArgs)
 
 main :: IO ()
 main = do
   -- input
   args <- getArgs
-  let x = read (head args) :: Int
+  let x = if null args then 0 else read (head args) :: Int -- default to 1 if no argument is passed
   let inputFile = "inputs/input" ++ show x ++ ".kt"
   input <- readFile inputFile
   -- output
@@ -22,6 +24,8 @@ main = do
   let ast = parse tokens
   printAST ast file
   print (checkAST ast)
+  let (lowLevelCode, _) = runState (transAST ast) (0, 0)
+  mapM_ (appendFile file . (++ "\n") . show) lowLevelCode
 
 printTokens :: Show a => a -> FilePath -> IO ()
 printTokens tokens file = do
