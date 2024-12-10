@@ -6,7 +6,8 @@ import           Parser              (parse)
 import           SemanticAnalyzer    (checkAST)
 import           CodeGenaretor       (transAST)
 import           System.Environment  (getArgs)
-import           Liveness            (buildGraph)
+import           Liveness            (buildGraph, computeLiveness, generateInterferenceGraph, initPilha, generateStack, attributeTemps)
+import           Assembler           (assembler)
 
 main :: IO ()
 main = do
@@ -27,8 +28,11 @@ main = do
   print (checkAST ast)
   let (lowLevelCode, _) = runState (transAST ast) (0, 0)
   mapM_ (appendFile file . (++ "\n") . show) lowLevelCode
-  let graph = computeLiveness 1 lowLevelCode
-  mapM_ print graph
+  let graph = computeLiveness (buildGraph lowLevelCode)
+  let interferenceGra = generateInterferenceGraph graph
+  let stack = generateStack interferenceGra initPilha
+  let varAssign = attributeTemps stack []
+  appendFile file (assembler lowLevelCode varAssign)
 
 printTokens :: Show a => a -> FilePath -> IO ()
 printTokens tokens file = do

@@ -7,7 +7,7 @@ import           Parser   (Type (..))
 type Temp = String
 type Mutable = Bool
 
-data SymbolTableInfo = DATATEMP Temp | DATATYPE Type Mutable
+data SymbolTableInfo = DATATEMP Temp Type | DATATYPE Type Mutable
   deriving(Show)
 
 -- Define an symbol table as a Map of type -> (key: String, value: Type) 

@@ -1,9 +1,7 @@
 fun main() {
-    var N: Int = 10;
-    var a: Int = 0;
+    var a: Int = 10;    // Mutable variable
+    val b: Float = 20.5;    // Immutable variable
 
-    while (a < N) {
-        a = 10;
-    }
-
+    print(a);
+    print(b);
 }

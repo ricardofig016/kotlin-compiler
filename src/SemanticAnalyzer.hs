@@ -6,6 +6,10 @@ import           Parser      (Type (..), Exp (..), Statement (..), Block (..))
 
 generateSymbolTable :: SymbolTable -> Block -> SymbolTable
 generateSymbolTable table (Statements []) = table
+generateSymbolTable table (Statements ((VarDecl iden LongType _):rest)) = generateSymbolTable (insertNewEntry iden (DATATYPE IntType True) table) (Statements rest)
+generateSymbolTable table (Statements ((ValDecl iden LongType _):rest)) = generateSymbolTable (insertNewEntry iden (DATATYPE IntType False) table) (Statements rest)
+generateSymbolTable table (Statements ((VarDecl iden DoubleType _):rest)) = generateSymbolTable (insertNewEntry iden (DATATYPE FloatType True) table) (Statements rest)
+generateSymbolTable table (Statements ((ValDecl iden DoubleType _):rest)) = generateSymbolTable (insertNewEntry iden (DATATYPE FloatType False) table) (Statements rest)
 generateSymbolTable table (Statements ((VarDecl iden typ _):rest)) = generateSymbolTable (insertNewEntry iden (DATATYPE typ True) table) (Statements rest)
 generateSymbolTable table (Statements ((ValDecl iden typ _):rest)) = generateSymbolTable (insertNewEntry iden (DATATYPE typ False) table) (Statements rest)
 generateSymbolTable table (Statements (_:rest)) = generateSymbolTable table (Statements rest)
@@ -29,11 +33,11 @@ resolveArithmeticTypes t1 t2
 
 checkExpr :: SymbolTable -> Exp -> Type
 checkExpr _ (Num _) = IntType
-checkExpr _ (Real _) = DoubleType
+checkExpr _ (Real _) = FloatType
 checkExpr env (Id iden) = case (search iden env) of
   Nothing -> error "undeclared var"
   Just (DATATYPE t _) -> t
-  Just (DATATEMP _) -> error "symbolTable malformatted"
+  Just (DATATEMP _ _) -> error "symbolTable malformatted"
 checkExpr _ (TruthValue _) = BooleanType
 checkExpr _ (Letter _) = CharType
 checkExpr _ (Sentence _) = StringType  
@@ -116,14 +120,14 @@ checkStm env (VarDecl iden _ expr)
       Just (DATATYPE typ _) -> if checkExpr env expr == typ
                     then True
                     else error "type error in vardecl"
-      Just (DATATEMP _) -> error "symbolTable malformatted"
+      Just (DATATEMP _ _) -> error "symbolTable malformatted"
       Nothing -> error "undeclared variable"  
 checkStm env (ValDecl iden _ expr)
   = case search iden env of
       Just (DATATYPE typ _) -> if checkExpr env expr == typ
                     then True
                     else error "type error in valdecl"
-      Just (DATATEMP _) -> error "symbolTable malformatted"
+      Just (DATATEMP _ _) -> error "symbolTable malformatted"
       Nothing -> error "undeclared variable"  
 checkStm env (Assignment iden expr)
   = case search iden env of
@@ -132,7 +136,7 @@ checkStm env (Assignment iden expr)
                     else if checkExpr env expr == typ
                     then True
                     else error "type error in assign"
-      Just (DATATEMP _) -> error "symbolTable malformatted"
+      Just (DATATEMP _ _) -> error "symbolTable malformatted"
       Nothing -> error "undeclared variable"
 checkStm _ (PrintStmt _) = True
 checkStm env (WhileStmt expr block)
