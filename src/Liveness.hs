@@ -1,6 +1,6 @@
 module Liveness where
 
-import           CodeGenaretor (Instr (..), Temp)
+import           CodeGeneretor (Instr (..), Temp)
 import           Data.List ((\\), nub, sortBy, foldl')
 import Data.Function (on)
 

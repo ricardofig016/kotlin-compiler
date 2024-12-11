@@ -1,4 +1,4 @@
-module CodeGenaretor where
+module CodeGeneretor where
 
 import           Control.Monad.State
 import           Parser   (Statement (..), Exp (..), Block (..), Type (..))

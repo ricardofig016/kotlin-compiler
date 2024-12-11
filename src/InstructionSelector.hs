@@ -1,6 +1,6 @@
-module Assembler where
+module InstructionSelector where
 
-import           CodeGenaretor (Instr (..), Temp, BinOp (..))
+import           CodeGeneretor (Instr (..), Temp, BinOp (..))
 import           Parser        (Type (..))
 import           Data.Char     (isAlphaNum)
 

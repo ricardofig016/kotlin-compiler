@@ -4,10 +4,10 @@ import           Control.Monad.State (runState)
 import           Lexer               (alexScanTokens)
 import           Parser              (parse)
 import           SemanticAnalyzer    (checkAST)
-import           CodeGenaretor       (transAST)
+import           CodeGeneretor       (transAST)
 import           System.Environment  (getArgs)
 import           Liveness            (buildGraph, computeLiveness, generateInterferenceGraph, initPilha, generateStack, attributeTemps)
-import           Assembler           (assembler)
+import           InstructionSelector           (assembler)
 
 main :: IO ()
 main = do
@@ -25,13 +25,18 @@ main = do
   -- parsing
   let ast = parse tokens
   printAST ast file
+  -- Semantic Analysis
   print (checkAST ast)
+  -- Intermediate code 
   let (lowLevelCode, _) = runState (transAST ast) (0, 0)
   mapM_ (appendFile file . (++ "\n") . show) lowLevelCode
+  -- Liveness Analysis 
   let graph = computeLiveness (buildGraph lowLevelCode)
   let interferenceGra = generateInterferenceGraph graph
+  -- Register Assignment
   let stack = generateStack interferenceGra initPilha
   let varAssign = attributeTemps stack []
+  -- Generate AssemblyCode
   appendFile file (assembler lowLevelCode varAssign)
 
 printTokens :: Show a => a -> FilePath -> IO ()
