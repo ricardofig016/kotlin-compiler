@@ -55,6 +55,14 @@ generateSymbolTable table (Statements ((VarDecl iden typ _):rest)) = do
     temp <- newTemp
     let newTable = insertNewEntry iden (DATATEMP temp typ) table 
     generateSymbolTable newTable (Statements rest)
+generateSymbolTable table (Statements ((ValDecl iden LongType _):rest)) = do
+    temp <- newTemp
+    let newTable = insertNewEntry iden (DATATEMP temp IntType) table
+    generateSymbolTable newTable (Statements rest)
+generateSymbolTable table (Statements ((ValDecl iden DoubleType _):rest)) = do
+    temp <- newTemp
+    let newTable = insertNewEntry iden (DATATEMP temp FloatType) table
+    generateSymbolTable newTable (Statements rest)
 generateSymbolTable table (Statements ((ValDecl iden typ _):rest)) = do
     temp <- newTemp
     let newTable = insertNewEntry iden (DATATEMP temp typ) table
