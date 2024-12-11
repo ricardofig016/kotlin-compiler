@@ -246,8 +246,9 @@ transStm (WhileStmt cond block) table = do
 transBlock :: Block -> SymbolTable -> State Count [Instr]
 transBlock (Statements []) _ = return []
 transBlock (Statements (stm:rest)) table = do
-    code1 <- transStm stm table
-    code2 <- transBlock (Statements rest) table
+    newSymbolTable <- generateSymbolTable table (Statements (stm:rest))
+    code1 <- transStm stm newSymbolTable
+    code2 <- transBlock (Statements rest) newSymbolTable
     return (code1 ++ code2)
 
 transAST :: Block -> State Count [Instr]

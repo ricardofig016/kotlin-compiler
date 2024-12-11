@@ -97,10 +97,10 @@ assembInstrCond (COND t1 Equal t2 labelt labelf) (LABEL labelx) env
     | labelt == labelx = "\tbne\t"++(getAssigned env t1)++", "++(getAssigned env t2)++", "++labelf++"\n"++labelt++":\n"
     | otherwise = "\tbeq\t"++(getAssigned env t1)++", "++(getAssigned env t2)++", "++labelt++"\n\tj\t"++labelf++"\n"++labelx++":\n"
 assembInstrCond (COND t1 LessThan t2 labelt labelf) (LABEL labelx) env
-    | labelf == labelx = "\t\t\tbge\t"++(getAssigned env t1)++", "++(getAssigned env t2)++", "++labelt++"\n"++labelf++":\n"
-    | labelt == labelx = "\tblt\t"++(getAssigned env t1)++", "++(getAssigned env t2)++", "++labelf++"\n"++labelt++":\n"
+    | labelf == labelx = "\t\t\tblt\t"++(getAssigned env t1)++", "++(getAssigned env t2)++", "++labelt++"\n"++labelf++":\n"
+    | labelt == labelx = "\tbge\t"++(getAssigned env t1)++", "++(getAssigned env t2)++", "++labelf++"\n"++labelt++":\n"
     | otherwise = "\tblt\t"++(getAssigned env t1)++", "++(getAssigned env t2)++", "++labelt++"\n\tj\t"++labelf++"\n"++labelx++":\n"
 assembInstrCond (COND t1 LessOrEqual t2 labelt labelf) (LABEL labelx) env
     | labelf == labelx = "\t\t\tble\t"++(getAssigned env t1)++", "++(getAssigned env t2)++", "++labelt++"\n"++labelf++":\n"
-    | labelt == labelx = "\tblt\t"++(getAssigned env t1)++", "++(getAssigned env t2)++", "++labelf++"\n\t"++labelt++":\n"
+    | labelt == labelx = "\tbgt\t"++(getAssigned env t1)++", "++(getAssigned env t2)++", "++labelf++"\n\t"++labelt++":\n"
     | otherwise = "\tble\t"++(getAssigned env t1)++", "++(getAssigned env t2)++", "++labelt++"\n\tj\t"++labelf++"\n"++labelx++":\n"
