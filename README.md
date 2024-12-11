@@ -22,9 +22,15 @@ The entire compiler is implemented in Haskell, using two key tools: **Alex** and
 
 - **Parsing**: In the parsing phase, the compiler processes the tokens generated during lexical analysis to construct an abstract syntax tree, which reflects the hierarchical structure of the code according to the subset's grammar. This tree enables the compiler to understand the nested relationships among expressions, statements, and blocks.
 
-<!-- - **Semantic Analysis**: Semantic analysis ensures the logical correctness of the syntax tree. This phase includes type checking, verification of variable declarations, and validation of proper usage for expressions and operators within the Kotlin subset. It catches errors that are beyond the reach of parsing alone.
+- **Semantic Analysis**: Semantic analysis ensures the logical correctness of the syntax tree. This phase includes type checking, verification of variable declarations, and validation of proper usage for expressions and operators within the Kotlin subset. It catches errors that are beyond the reach of parsing alone.
 
-- **Code Generation**: The code generation phase translates the validated syntax tree into an intermediate representation or target code, producing output that represents the original Kotlin logic within the defined subset and is suitable for execution. -->
+- **Code Generation**: The code generation phase translates the validated syntax tree into an intermediate representation or target code, producing output that represents the original Kotlin logic within the defined subset and is suitable for execution.
+
+-**Liveness Analysis**: Consists in creating a graph of intersections and living variables in moment of entry and leaving of each instruction of intermediate code in order to determinate the graph of intersections .
+
+-**Register Allocation**: Determines the graph of intersections (non-directed graph) which each node is a register, then we put the node with less neighbours in stack and removes the node from graph and the incident archs until the graph is empty then pop from stack and color it different of their neighbours until stack is empty, each register would have an color.
+
+-**Assembly Code Generetor**: Uses the Register Allocation and the Intermidiate Code to generate assembly code instructions in MIPS MARS assembly (uses some pseudo-instructions) generates the .data for float and strings and then .text (generates functions to print and read to)
 
 ## Coverage
 
@@ -115,9 +121,14 @@ kotlin-compiler
 │   ├── input2.kt
 │   └── (...)
 └── src
+    ├── CodeGeneretor.hs
+    ├── InstructionSelector.hs
     ├── Lexer.hs
     ├── Lexer.x
+    ├── Liveness.hs
     ├── Main.hs
     ├── Parser.hs
-    └── Parser.y
+    ├── Parser.y
+    ├── SemanticAnalyzer.hs
+    └── SymbolTable.hs
 ```
