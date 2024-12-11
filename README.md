@@ -26,11 +26,11 @@ The entire compiler is implemented in Haskell, using two key tools: **Alex** and
 
 - **Code Generation**: The code generation phase translates the validated syntax tree into an intermediate representation or target code, producing output that represents the original Kotlin logic within the defined subset and is suitable for execution.
 
--**Liveness Analysis**: Consists in creating a graph of intersections and living variables in moment of entry and leaving of each instruction of intermediate code in order to determinate the graph of intersections .
+- **Liveness Analysis**: Consists in creating a graph of intersections and living variables in moment of entry and leaving of each instruction of intermediate code in order to determinate the graph of intersections .
 
--**Register Allocation**: Determines the graph of intersections (non-directed graph) which each node is a register, then we put the node with less neighbours in stack and removes the node from graph and the incident archs until the graph is empty then pop from stack and color it different of their neighbours until stack is empty, each register would have an color.
+- **Register Allocation**: Determines the graph of intersections (non-directed graph) which each node is a register, then we put the node with less neighbours in stack and removes the node from graph and the incident archs until the graph is empty then pop from stack and color it different of their neighbours until stack is empty, each register would have an color.
 
--**Assembly Code Generetor**: Uses the Register Allocation and the Intermidiate Code to generate assembly code instructions in MIPS MARS assembly (uses some pseudo-instructions) generates the .data for float and strings and then .text (generates functions to print and read to)
+- **Assembly Code Generetor**: Uses the Register Allocation and the Intermidiate Code to generate assembly code instructions in MIPS MARS assembly (uses some pseudo-instructions) generates the .data for float and strings and then .text (generates functions to print and read to)
 
 ## Coverage
 
